@@ -36,8 +36,11 @@ public class TermCounter {
 	 * @return
 	 */
 	public int size() {
-        // TODO: fill this in.
-		return -1;
+		Integer accumulator = 0;
+        for (String key: keySet()) {
+			accumulator += get(key);
+		}
+		return accumulator;
 	}
 
 	/**
@@ -87,7 +90,7 @@ public class TermCounter {
 	 * @param term
 	 */
 	public void incrementTermCount(String term) {
-		// System.out.println(term);
+		
 		put(term, get(term) + 1);
 	}
 
@@ -98,6 +101,8 @@ public class TermCounter {
 	 * @param count
 	 */
 	public void put(String term, int count) {
+		// System.out.println(term);
+		// System.out.println(count);
 		map.put(term, count);
 	}
 

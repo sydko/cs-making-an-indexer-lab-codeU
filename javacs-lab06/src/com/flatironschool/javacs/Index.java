@@ -54,11 +54,13 @@ public class Index {
 	 * @param paragraphs  Collection of elements that should be indexed.
 	 */
 	public void indexPage(String url, Elements paragraphs) {
-		// make a TermCounter and count the terms in the paragraphs
-        // TODO: fill this in
-		
+		TermCounter termCounter = new TermCounter(url); //make a TermCounter
+		termCounter.processElements(paragraphs); // count the terms in the paragraphs
+		System.out.println("number of terms: " +  termCounter.keySet().size());
 		// for each term in the TermCounter, add the TermCounter to the index
-        // TODO: fill this in
+		for (String term: termCounter.keySet()) {
+			add(term, termCounter);
+		}
 	}
 
 	/**
@@ -92,7 +94,6 @@ public class Index {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-		
 		WikiFetcher wf = new WikiFetcher();
 		Index indexer = new Index();
 
@@ -103,7 +104,7 @@ public class Index {
 		url = "https://en.wikipedia.org/wiki/Programming_language";
 		paragraphs = wf.fetchWikipedia(url);
 		indexer.indexPage(url, paragraphs);
-		
+
 		indexer.printIndex();
 	}
 
